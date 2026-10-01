@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name | Portfolio</title>
+  <meta name="description" content="Personal portfolio of Your Name: skills and projects.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #F3F6F8;
+      --surface: #FFFFFF;
+      --ink: #12202E;
+      --muted: #4F6070;
+      --line: #D3DCE3;
+      --accent: #2447D6;
+      --accent-soft: #DCE5FF;
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { color: var(--ink); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Header / navigation */
+    header.site {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    header.site .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 3.75rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .brand { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+    nav a { color: var(--ink); text-decoration: none; font-weight: 500; padding: .25rem 0; border-bottom: 2px solid transparent; }
+    nav a:hover { border-bottom-color: var(--accent); color: var(--ink); }
+
+    /* Personal statement (hero) */
+    .hero { padding: 5rem 0 4.5rem; }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(2rem, 5.6vw, 3.75rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.75rem;
+      max-width: 22ch;
+    }
+    .hero .name { margin: 0 0 1rem; color: var(--muted); font-weight: 500; }
+    .hero .cta { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: .7rem 1.25rem; border-radius: 6px;
+      font-weight: 500; text-decoration: none; border: 2px solid var(--accent);
+    }
+    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .btn.secondary { color: var(--accent); background: transparent; }
+    .btn.secondary:hover { background: var(--accent-soft); color: var(--ink); }
+
+    /* Sections */
+    section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+    h2 {
+      font-family: var(--display); font-weight: 700;
+      font-size: 1.9rem; letter-spacing: -0.01em;
+      margin: 0 0 .5rem;
+    }
+    .section-intro { color: var(--muted); margin: 0 0 2rem; max-width: 60ch; }
+
+    /* Skills */
+    .skill-groups { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+    .skill-groups h3 { font-family: var(--display); font-size: 1.1rem; margin: 0 0 .75rem; }
+    .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chips li {
+      background: var(--accent-soft); color: var(--ink);
+      padding: .3rem .75rem; border-radius: 999px; font-size: .95rem; font-weight: 500;
+    }
+
+    /* Projects */
+    .project {
+      display: grid; grid-template-columns: 1fr; gap: .5rem;
+      padding: 1.75rem 0; border-bottom: 1px solid var(--line);
+    }
+    .project:first-of-type { padding-top: 0; }
+    .project:last-of-type { border-bottom: 0; padding-bottom: 0; }
+    .project h3 { font-family: var(--display); font-size: 1.45rem; margin: 0; letter-spacing: -0.01em; }
+    .project p { margin: 0; max-width: 62ch; }
+    .tags { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin: .25rem 0 0; padding: 0; color: var(--muted); font-size: .95rem; }
+    .links { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: .5rem; font-weight: 500; }
+    @media (min-width: 46rem) {
+      .project { grid-template-columns: 14rem 1fr; gap: 0 2.5rem; }
+      .project .meta { grid-column: 1; grid-row: 1 / span 3; }
+      .project .body { grid-column: 2; }
+    }
+    .project .meta .tags { flex-direction: column; gap: .15rem; }
+
+    /* Contact / footer */
+    .contact p { margin: 0 0 1rem; max-width: 55ch; }
+    footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+
+    @media (max-width: 40rem) {
+      .hero { padding: 3rem 0; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="#top">Your Name</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- PERSONAL STATEMENT -->
+    <div class="wrap hero">
+      <!-- EDIT: put your name here -->
+      <p class="name">Hi, I'm Your Name.</p>
+      <!-- EDIT: one clear sentence about who you are professionally -->
+      <h1>I'm a computer science student who builds clean, reliable software and turns messy data into clear answers.</h1>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn secondary" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <h2 id="skills-title">Skills</h2>
+        <p class="section-intro">The tools and strengths I bring to a team.</p>
+
+        <!-- EDIT: replace with your real skills; add or remove groups and items freely -->
+        <div class="skill-groups">
+          <div>
+            <h3>Programming</h3>
+            <ul class="chips">
+              <li>Python</li>
+              <li>JavaScript</li>
+              <li>HTML &amp; CSS</li>
+              <li>SQL</li>
+              <li>Java</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Tools</h3>
+            <ul class="chips">
+              <li>Git &amp; GitHub</li>
+              <li>VS Code</li>
+              <li>Excel</li>
+              <li>Jupyter Notebooks</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Professional</h3>
+            <ul class="chips">
+              <li>Problem solving</li>
+              <li>Team collaboration</li>
+              <li>Clear communication</li>
+              <li>Time management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <h2 id="projects-title">Projects</h2>
+        <p class="section-intro">A few things I've built, with the code and live versions where available.</p>
+
+        <!--
+          EDIT each project: title, description, tags, and the two links.
+          Replace "your-username" and "repo-name" with your real GitHub details.
+          If a project has no live demo, delete that link.
+        -->
+        <article class="project">
+          <div class="meta">
+            <ul class="tags">
+              <li>Python</li>
+              <li>Pandas</li>
+              <li>Matplotlib</li>
+            </ul>
+          </div>
+          <div class="body">
+            <h3>Project One: Data Analysis Dashboard</h3>
+            <p>Analyzed a public dataset to find trends and built charts that summarize the key findings. Cleaned the data, answered three research questions, and documented the process in a notebook.</p>
+            <div class="links">
+              <a href="https://github.com/your-username/project-one" target="_blank" rel="noopener">View code on GitHub</a>
+              <a href="https://your-username.github.io/project-one/" target="_blank" rel="noopener">Live demo</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="meta">
+            <ul class="tags">
+              <li>JavaScript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+            </ul>
+          </div>
+          <div class="body">
+            <h3>Project Two: Task Manager App</h3>
+            <p>A web app for adding, completing, and filtering daily tasks. Saves tasks in the browser so they stay after a refresh, and works on both phones and desktops.</p>
+            <div class="links">
+              <a href="https://github.com/your-username/project-two" target="_blank" rel="noopener">View code on GitHub</a>
+              <a href="https://your-username.github.io/project-two/" target="_blank" rel="noopener">Live demo</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="meta">
+            <ul class="tags">
+              <li>Java</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+          <div class="body">
+            <h3>Project Three: Library Database System</h3>
+            <p>A small database-backed program for tracking books, members, and loans. Includes a normalized schema and queries that report overdue items.</p>
+            <div class="links">
+              <a href="https://github.com/your-username/project-three" target="_blank" rel="noopener">View code on GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 id="contact-title">Contact</h2>
+        <p>I'm looking for internships and entry-level roles. Email me or find me online.</p>
+        <!-- EDIT: use your real email and profile links -->
+        <div class="links">
+          <a href="mailto:you@example.com">you@example.com</a>
+          <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/your-username" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">&copy; 2026 Your Name</div>
+  </footer>
+
+</body>
+</html>
